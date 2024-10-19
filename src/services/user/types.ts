@@ -1,3 +1,4 @@
+import { Endereco } from './../cep/types';
 export interface UserInformation {
   id: number;
   nomeCompleto: string;
@@ -8,6 +9,7 @@ export interface UserInformation {
   curso: CourseInfo;
   periodo: string;
   verificado: boolean;
+  endereco: Endereco;
 }
 
 export interface CourseInfo {

@@ -22,6 +22,7 @@ export const FormContainerAddress = styled.div`
   flex-direction: column;
   height: 235px;
   padding: 15px 0px 15px 0px;
+  
 `;
 
 export const Title = styled.h2`
