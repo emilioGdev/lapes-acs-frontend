@@ -20,6 +20,7 @@
     "cypress": "^12.17.0",
     "eslint-config-next": "13.4.5",
     "js-cookie": "^3.0.5",
+    "lapes-next-v13": "file:",
     "moment": "^2.29.4",
     "next": "^13.4.5",
     "pdfjs-dist": "^3.9.179",

@@ -11,5 +11,6 @@ export const getUserInformation = async (
       'Content-Type': 'application/json'
     }
   });
+  console.log(response);
   return response;
 };
