@@ -61,9 +61,34 @@ const UserProfile = () => {
           </S.InputGroup>
         </S.InputArea>
       </S.FormContainer>
+
       <S.FormContainerAddress>
         <S.Label>Endereço:</S.Label>
+        <S.InputArea>
+          <S.InputGroup>
+            <S.LabelMinor>Rua:</S.LabelMinor>
+            <S.Input type="text" value={userInfo.endereco.rua} readOnly />
+          </S.InputGroup>
+          <S.InputGroup>
+            <S.LabelMinor>Bairro:</S.LabelMinor>
+            <S.Input type="text" value={userInfo.endereco.bairro} readOnly />
+          </S.InputGroup>
+          <S.InputGroup>
+            <S.LabelMinor>Cidade:</S.LabelMinor>
+            <S.Input type="text" value={userInfo.endereco.cidade} readOnly />
+          </S.InputGroup>
+          <S.InputGroup>
+            <S.LabelMinor>UF:</S.LabelMinor>
+            <S.Input type="text" value={userInfo.endereco.uf} readOnly />
+          </S.InputGroup>
+          <S.InputGroup>
+            <S.LabelMinor>Cep:</S.LabelMinor>
+            <S.Input type="text" value={userInfo.endereco.c} readOnly />
+          </S.InputGroup>
+        </S.InputArea>
       </S.FormContainerAddress>
+
+
       <S.ButtonsContainer>
         <S.SaveButton>Salvar</S.SaveButton>
         <S.Button onClick={() => router.push('/home')}>Voltar</S.Button>

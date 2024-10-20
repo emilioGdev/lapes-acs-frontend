@@ -22,6 +22,7 @@ export const FormContainerAddress = styled.div`
   flex-direction: column;
   height: 235px;
   padding: 15px 0px 15px 0px;
+  
 `;
 
 export const Title = styled.h2`
@@ -86,10 +87,11 @@ export const Select = styled.select`
 
 export const ButtonsContainer = styled.div`
   display: flex;
-  margin-top: 16px;
+  margin-top: 40px;
   bottom: 80px;
   position: absolute;
   flex-direction: column;
+  position: relative;
 `;
 
 export const SaveButton = styled.button`
@@ -181,6 +183,7 @@ export const Button = styled.button`
   margin-top: 20px;
   margin-bottom: 10px;
   font-weight: bold;
+  
 `;
 
 export const ButtonEnviar = styled.button`
