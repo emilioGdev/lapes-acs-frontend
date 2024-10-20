@@ -51,7 +51,15 @@ export default function SideNavBar() {
     };
 
     checkIsMobile();
-    if (pathName !== '/signin') {
+
+    const recoverPasswordRegex = /\/account\/reset\/(.+)/;
+
+    if (
+      pathName !== '/signin' &&
+      pathName !== '/not-found' &&
+      pathName !== '/confirmacao-cadastro' &&
+      !recoverPasswordRegex.test(pathName)
+    ) {
       userInfo();
     }
 
@@ -61,6 +69,8 @@ export default function SideNavBar() {
       window.removeEventListener('resize', checkIsMobile);
     };
   }, [token, pathName]);
+
+  console.log(userInfo);
 
   const recoverPasswordRegex = /\/account\/reset\/(.+)/;
 

@@ -8,9 +8,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   background: #f1efef;
+
   @media screen and (max-width: 767px) {
     height: max-content;
   }
@@ -25,12 +25,11 @@ export const NavDiv = styled.div``;
 export const ContentDiv = styled.div`
   width: 90%;
   margin-left: 100px;
+  padding-bottom: 8px;
+
   @media screen and (max-width: 767px) {
     width: 100vw;
     margin: 0;
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 
@@ -79,7 +78,7 @@ export const H3Title = styled.h3``;
 
 export const FunctionContainer = styled.div`
   background: #f3f3f3;
-  padding: 1vw;
+  padding: 16px;
   border-radius: 12px;
   max-width: 95%;
   margin: 0 auto;
