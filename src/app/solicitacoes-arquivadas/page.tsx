@@ -36,6 +36,8 @@ export default function SolicitacoesArquivadas() {
     setReloadEffect((prev) => prev + 1);
   }
 
+  console.log(requestList);
+
   return (
     <S.Container>
       <S.Content>
