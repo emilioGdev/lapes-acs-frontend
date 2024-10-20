@@ -81,31 +81,27 @@ export default function SolicitacoesArquivadas() {
           </S.BackDiv>
         </S.FilterDiv>
         <S.RequestDiv>
-          {requestList !== undefined ? (
-            <>
-              {filteredRequestList.map((item) => (
-                <RequestList
-                  status={item.requisicaoStatus}
-                  id={item.id}
-                  initialDate={moment(item.dataDeSubmissao).format(
-                    'DD/MM/YYYY'
-                  )}
-                  hours={item.quantidadeDeHoras}
-                  key={item.id}
-                  token={token}
-                  isDraft={true}
-                  reloadRequestDelete={function (): void {
-                    throw new Error('Function not implemented.');
-                  }}
-                  reloadRequestArchive={reloadPag}
-                  type={archive}
-                />
-              ))}
-            </>
+        {filteredRequestList.length > 0 ? (
+            filteredRequestList.map((item) => (
+              <RequestList
+                status={item.requisicaoStatus}
+                id={item.id}
+                initialDate={moment(item.dataDeSubmissao).format(
+                  'DD/MM/YYYY'
+                )}
+                hours={item.quantidadeDeHoras}
+                key={item.id}
+                token={token}
+                isDraft={true}
+                reloadRequestDelete={function (): void {
+                  throw new Error('Function not implemented.');
+                }}
+                reloadRequestArchive={reloadPag}
+                type={archive}
+              />
+            ))
           ) : (
-            <>
-              <p>Nao exite nenhuma requisicao arquivada</p>
-            </>
+            <p>Não existe nenhuma solicitação arquivada.</p>
           )}
         </S.RequestDiv>
       </S.Content>

@@ -89,7 +89,11 @@ export const IconButton = styled.span`
   cursor: pointer;
 `;
 
-export const RequestDiv = styled.div``;
+export const RequestDiv = styled.div`
+  margin-top: 0.5em;
+
+
+`;
 
 export const BackButton = styled(Button)`
   background: '#fff';
