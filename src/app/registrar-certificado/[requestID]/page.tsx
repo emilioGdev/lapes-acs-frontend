@@ -151,6 +151,9 @@ export default function RegistePageTest({ params }: idProps) {
     setSelectedAtividade(
       selectedAxis?.id != null ? String(selectedAxis?.id) : '0'
     );
+
+    setSelectedEixo(certificateData[certificateIndex]?.eixoAtividade || '');
+
   }, [
     activitiesData,
     certificateData,
@@ -159,6 +162,7 @@ export default function RegistePageTest({ params }: idProps) {
     setDataInicial,
     setHoras,
     setSelectedAtividade,
+    setSelectedEixo,
     setTitulo
   ]);
 
