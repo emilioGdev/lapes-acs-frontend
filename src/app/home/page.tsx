@@ -10,7 +10,7 @@ import FilterRequests from '../../components/FilterRequests';
 import { PaginationComp } from '../../components/PaginationComp';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
-import { newRequest } from '../../services/newRequest';
+import { newRequest } from '../../services/request';
 import { getUserHours, pagination } from '../../services/student';
 import { UserHours, PageValue } from '../../services/student/types';
 import { filterRequestsByEixo, getUserInformation } from '../../services/user';
