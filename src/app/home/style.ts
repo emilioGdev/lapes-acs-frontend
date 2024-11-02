@@ -33,6 +33,8 @@ export const ContentDiv = styled.div`
   }
 `;
 
+export const UserName = styled.h1``;
+
 export const TitleDiv = styled.div`
   width: 100%;
   @media screen and (max-width: 767px) {
@@ -40,17 +42,6 @@ export const TitleDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-  }
-`;
-
-export const UserName = styled.h1`
-  color: #1c3c78;
-  font-size: 1.75em;
-  @media screen and (max-width: 767px) {
-    font-size: 1em;
   }
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {

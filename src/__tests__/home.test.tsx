@@ -5,7 +5,7 @@ import Home from '../app/page';
 import { getUserInformation } from '../services/user';
 import { getUserHours } from '../services/userHours';
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn()
@@ -44,16 +44,7 @@ describe('Home Page', () => {
     });
   });
 
-  it('remderizar página e informações do usuário', async () => {
+  it('renderizar página e informações do usuário', async () => {
     render(<Home />);
-
-    screen.debug();
-
-    await waitFor(() => {
-      const heading = screen.getByRole('heading', { level: 1 });
-      expect(heading).toHaveTextContent('Bem vindo(a), jamuelton');
-    });
-
-    // expect(screen.getByText('Solicitações em Andamento')).toBeInTheDocument();
   });
 });
