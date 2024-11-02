@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { getArchived } from '../../services/archived';
+import { getArchived } from '../../services/request';
 import { UserRequest } from '../../services/request/types';
 import { RequestList } from '../home/components/RequestList';
 import * as S from './styles';

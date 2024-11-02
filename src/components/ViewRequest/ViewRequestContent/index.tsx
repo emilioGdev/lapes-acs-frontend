@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
-import { downloadPDF } from '../../../services/downloadRequest';
+import { downloadPDF } from '../../../services/request';
 import { CertificateList } from '../../CertificateList';
 import { Pagination } from '../../Pagination';
 import { ViewRequestProps, StatusCheckInterface } from './interface/types';

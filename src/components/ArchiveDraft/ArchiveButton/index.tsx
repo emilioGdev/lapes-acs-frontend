@@ -1,6 +1,6 @@
 import { errorToast } from '../../../functions/errorToast';
 import { sucessToast } from '../../../functions/sucessToast';
-import { DontArchived, archived } from '../../../services/archived';
+import { DontArchived, archived } from '../../../services/request';
 import * as S from './styles';
 
 export type ArchiveRequestProps = {

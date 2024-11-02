@@ -18,3 +18,16 @@ export interface Certificate {
   eixoAtividade: string;
   statusCertificado: string;
 }
+
+export interface RequestId {
+  id: number;
+}
+
+export interface ArchiveInterface {
+  token: string;
+  id: number;
+}
+
+export interface ResponseArchiveInterface {
+  requisicoes: Array<UserRequest>;
+}
