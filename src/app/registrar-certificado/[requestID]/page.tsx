@@ -7,8 +7,8 @@ import { errorToast } from '../../../functions/errorToast';
 import { sucessToast } from '../../../functions/sucessToast';
 import { getActivities } from '../../../services/activity';
 import { Activity } from '../../../services/activity/types';
-import { createCertificate } from '../../../services/registerCertificate';
-import { CreateCertificate } from '../../../services/registerCertificate/types';
+import { createCertificate } from '../../../services/certificate';
+import { CreateCertificates } from '../../../services/certificate/types';
 import { getRequest } from '../../../services/request';
 import PdfViewer from '../PDFViewer/PDFViewer';
 import { delay } from './functions/delay/delay';
@@ -222,7 +222,7 @@ export default function RegistePageTest({ params }: idProps) {
     }
   };
 
-  const createCerificateData: CreateCertificate = {
+  const createCerificateData: CreateCertificates = {
     titulo: titulo,
     dataIncial: dataInicial,
     dataFinal: dataFinal,

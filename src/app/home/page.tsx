@@ -10,14 +10,11 @@ import FilterRequests from '../../components/FilterRequests';
 import { PaginationComp } from '../../components/PaginationComp';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
-import { filterRequestsByEixo } from '../../services/filterRequestsByEixo'; // Importe o serviço
 import { newRequest } from '../../services/newRequest';
-import { pagination } from '../../services/pagination';
-import { PageValue } from '../../services/pagination/types';
-import { getUserInformation } from '../../services/user';
+import { getUserHours, pagination } from '../../services/student';
+import { UserHours, PageValue } from '../../services/student/types';
+import { filterRequestsByEixo, getUserInformation } from '../../services/user';
 import { UserInformation } from '../../services/user/types';
-import { getUserHours } from '../../services/userHours';
-import { UserHours } from '../../services/userHours/types';
 import { Barema } from './components/Barema';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest/NewRequestContent';

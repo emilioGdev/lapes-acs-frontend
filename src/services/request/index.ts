@@ -41,20 +41,3 @@ export const deleteRequest = async (
     }
   });
 };
-
-export const authenticateUser = async (
-  id: number,
-  authCode: string
-): Promise<void> => {
-  const requestBody = {
-    usuarioId: id,
-    codigoDeVerificacao: authCode
-  };
-  await fetchWrapper(`api/usuario/verificacao`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(requestBody)
-  });
-};
