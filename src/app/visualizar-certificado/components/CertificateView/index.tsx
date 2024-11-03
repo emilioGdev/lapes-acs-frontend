@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { certificateData } from '../../../../services/certificateData';
-import { getCertificateInterface } from '../../../../services/certificateData/types';
+import { certificateData } from '../../../../services/certificate';
+import { getCertificateInterface } from '../../../../services/certificate/types';
 import { DataText } from './components/DataText';
 import * as S from './styles';
 

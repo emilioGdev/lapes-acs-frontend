@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { sucessToast } from '../../../../functions/sucessToast';
 import { warnToast } from '../../../../functions/warnToast';
-import { sendRecovey } from '../../../../services/recovery';
+import { sendRecovey } from '../../../../services/auth';
 import { checkEmail } from './functions/checkEmail';
 import * as S from './styles';
 

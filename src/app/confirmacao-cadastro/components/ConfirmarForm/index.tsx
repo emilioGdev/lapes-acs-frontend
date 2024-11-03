@@ -5,9 +5,9 @@ import OtpInput from 'react-otp-input';
 import { errorToast } from '../../../../functions/errorToast';
 import { sucessToast } from '../../../../functions/sucessToast';
 import {
-  sendVerificationEmail,
-  verificarCodigo
-} from './../../../../services/verification';
+  verificarCodigo,
+  sendVerificationEmail
+} from '../../../../services/auth';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+// Importe a função
 
-import { exibirPDF } from '../../../services/PDF/index'; // Importe a função
+import { exibirPDF } from '../../../services/certificate';
 
 import Cookies from 'js-cookie';
 interface pdfProps {

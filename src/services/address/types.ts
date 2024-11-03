@@ -3,5 +3,5 @@ export interface Endereco {
   rua: string;
   bairro: string;
   uf: string;
-  cep:string;
+  cep: string;
 }

@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { login } from '../../../../services/signIn';
-import { Login } from '../../../../services/signIn/types';
+import { login } from '../../../../services/auth';
+import { Login } from '../../../../services/auth/types';
 import { checkEmail } from '../../functions/checkEmail';
 import { checkPassWord } from '../../functions/checkPassword';
 import { ForgetPassForm } from '../forgetPassword';
