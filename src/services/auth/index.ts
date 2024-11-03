@@ -80,20 +80,3 @@ export const sendRecovey = async (email: string) => {
 
   return response;
 };
-
-export const authenticateUser = async (
-  id: number,
-  authCode: string
-): Promise<void> => {
-  const requestBody = {
-    usuarioId: id,
-    codigoDeVerificacao: authCode
-  };
-  await fetchWrapper(`api/auth/verificacao`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(requestBody)
-  });
-};
