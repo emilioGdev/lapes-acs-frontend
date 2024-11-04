@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ToastContainer />
         <StyledComponentRegistry>
-          <AppLayout navbarType={'top'}>{children}</AppLayout>
+          <AppLayout navbarType={'side'}>{children}</AppLayout>
         </StyledComponentRegistry>
       </body>
     </html>

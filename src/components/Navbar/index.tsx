@@ -14,6 +14,16 @@ export default function Navbar() {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
+  const recoverPasswordRegex = /\/account\/reset\/(.+)/;
+
+  if (
+    pathName === '/signin' ||
+    pathName === '/not-found' ||
+    pathName === '/confirmacao-cadastro' ||
+    recoverPasswordRegex.test(pathName)
+  )
+    return null;
+
   return (
     <S.Container>
       <S.LogoLapes>
