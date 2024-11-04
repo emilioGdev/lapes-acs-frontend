@@ -1,4 +1,5 @@
-import { Endereco } from './../cep/types';
+import { Endereco } from '../address/types';
+
 export interface UserInformation {
   id: number;
   nomeCompleto: string;

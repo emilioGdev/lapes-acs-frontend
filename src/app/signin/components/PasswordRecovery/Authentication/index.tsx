@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { sucessToast } from '../../../../../functions/sucessToast';
 import { warnToast } from '../../../../../functions/warnToast';
-import { sendNewPass } from '../../../../../services/passRecovery';
+import { sendNewPass } from '../../../../../services/auth';
 import { checkPassWord } from './functions/checkPassword';
 import { checkSamePass } from './functions/checkSamePass';
 import * as S from './styles';

@@ -23,15 +23,13 @@ export default function Navbar() {
         <S.LogoTypeUser>Discente</S.LogoTypeUser>
       </S.LogoLapes>
       <S.Menu>
-        <S.Link href="/axios">inicio</S.Link>
-        <S.Link href="/lista-requisicoes">requisições</S.Link>
-        <S.Link href="/dashboard">dashboard</S.Link>
-        <S.Link href="/ajuda">ajuda</S.Link>
+        <S.Link href="/home">Home</S.Link>
+        <S.Link href="/solicitacoes-arquivadas">Arquivadas</S.Link>
+        <S.Link href="/duvidas-frequentes">ajuda</S.Link>
         <S.MenuPerfil onClick={toggleDropdown}>
           <User />
           <S.Dropdown isOpen={isOpen}>
-            <S.DropdownItem href="/perfil">Perfil</S.DropdownItem>
-            <S.DropdownItem href="/teste1">Meus Dados</S.DropdownItem>
+            <S.DropdownItem href="/perfil-usuario">Perfil</S.DropdownItem>
             <S.DropdownItem href="/teste2">sair</S.DropdownItem>
           </S.Dropdown>
         </S.MenuPerfil>

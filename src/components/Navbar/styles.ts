@@ -6,12 +6,11 @@ import styled from 'styled-components';
 export const Container = styled.nav`
   display: flex;
   justify-content: space-between;
-  width: 100vw;
-  height: 5vh;
   align-items: center;
   padding: 0.4rem;
-  color: ${colors.white};
+  color: #fff;
   margin-bottom: 2rem;
+  background: linear-gradient(135deg, rgba(37, 53, 85, 0.75) 50%, #253555 100%);
 `;
 
 export const LogoLapes = styled.div`
@@ -31,13 +30,14 @@ export const LogoTypeUser = styled.span`
   font-weight: 700;
   color: ${colors.red.logo};
   text-transform: uppercase;
+  padding-left: 2rem;
 `;
 
 export const LogoTitle = styled.h1`
   font-size: 1.1rem;
   font-weight: 500;
   font-family: 'Roboto', sans-serif;
-  color: ${colors.blueGrey[900]};
+  padding-left: 2rem;
   margin: 0;
 `;
 
@@ -51,11 +51,12 @@ export const Menu = styled.ul`
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding-right: 2rem;
 `;
 
 export const Link = styled(ActiveLink)`
   cursor: pointer;
-
+  color: #fff;
   &:hover {
     color: ${colors.red.logo};
     transition: 0.2s;

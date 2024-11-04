@@ -13,6 +13,7 @@ const UserProfile = () => {
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const token = Cookies.get('token') || '';
 
+  console.log(userInfo);
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -67,7 +68,7 @@ const UserProfile = () => {
         <S.InputArea>
           <S.InputGroup>
             <S.LabelMinor>Rua:</S.LabelMinor>
-            <S.Input type="text" value={userInfo.endereco.rua} readOnly />
+            <S.Input type="text" value={userInfo.endereco.rua} />
           </S.InputGroup>
           <S.InputGroup>
             <S.LabelMinor>Bairro:</S.LabelMinor>
@@ -83,11 +84,10 @@ const UserProfile = () => {
           </S.InputGroup>
           <S.InputGroup>
             <S.LabelMinor>Cep:</S.LabelMinor>
-            <S.Input type="text" value={userInfo.endereco.c} readOnly />
+            <S.Input type="text" value={userInfo.endereco.cep} readOnly />
           </S.InputGroup>
         </S.InputArea>
       </S.FormContainerAddress>
-
 
       <S.ButtonsContainer>
         <S.SaveButton>Salvar</S.SaveButton>
