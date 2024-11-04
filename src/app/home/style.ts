@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 83.5dvh;
   background: #f1efef;
 
   @media screen and (max-width: 767px) {
