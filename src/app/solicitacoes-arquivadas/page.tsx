@@ -81,14 +81,12 @@ export default function SolicitacoesArquivadas() {
           </S.BackDiv>
         </S.FilterDiv>
         <S.RequestDiv>
-        {filteredRequestList.length > 0 ? (
+          {filteredRequestList.length > 0 ? (
             filteredRequestList.map((item) => (
               <RequestList
                 status={item.requisicaoStatus}
                 id={item.id}
-                initialDate={moment(item.dataDeSubmissao).format(
-                  'DD/MM/YYYY'
-                )}
+                initialDate={moment(item.dataDeSubmissao).format('DD/MM/YYYY')}
                 hours={item.quantidadeDeHoras}
                 key={item.id}
                 token={token}
