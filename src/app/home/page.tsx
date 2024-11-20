@@ -38,7 +38,7 @@ export default function Home() {
       <S.ContentDiv>
         <S.TitleDiv>
           {userInfo && (
-            <S.UserName>
+            <S.UserName $Student={userInfo.perfis[0] == 'ALUNO'}>
               {`Bem vindo(a)`}, {userInfo.nomeCompleto.split(' ')[0]}!
             </S.UserName>
           )}

@@ -14,7 +14,7 @@ export type ComponentProps = {
   hours: number;
   token: string;
   isDraft: boolean;
-  type: boolean;
+  type?: boolean;
   reloadRequestDelete: () => void;
   reloadRequestArchive: () => void;
 };

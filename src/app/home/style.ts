@@ -34,7 +34,9 @@ export const ContentDiv = styled.div`
   }
 `;
 
-export const UserName = styled.h1``;
+export const UserName = styled.h1<{ $Student?: boolean }>`
+  color: ${(props) => (props.$Student ? '#22385E' : '#B21313')};
+`;
 
 export const TitleDiv = styled.div`
   width: 100%;

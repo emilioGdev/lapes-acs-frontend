@@ -6,6 +6,7 @@ import styled from 'styled-components';
 interface navOpen {
   isOpen: boolean;
   isMobile: boolean;
+  Student?: boolean;
 }
 
 export const Container = styled.aside<navOpen>`
@@ -13,7 +14,10 @@ export const Container = styled.aside<navOpen>`
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   border-radius: 16px;
   margin: 0.3rem;
-  background: linear-gradient(135deg, rgba(37, 53, 85, 0.75) 50%, #253555 100%);
+  background: ${(props) =>
+    props.Student
+      ? 'linear-gradient(135deg, rgba(37, 53, 85, 0.75) 50%, #253555 100%)'
+      : 'linear-gradient(135deg, rgba(85, 20, 20, 0.75) 50%, #B21313 100%)'};
   color: #fff;
   backdrop-filter: blur(8px);
   padding: 1.1rem;
