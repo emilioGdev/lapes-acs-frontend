@@ -43,7 +43,7 @@ export default function Escolaridade() {
     <S.Container>
       <S.ContentDiv>
         <S.TitleDiv>
-          <S.UserName>{`Bem vindo(a) Vitor`}</S.UserName>
+          <S.UserName>{`Bem vindo(a) Escolaridade`}</S.UserName>
           <S.Line />
         </S.TitleDiv>
         <S.FunctionContainer>

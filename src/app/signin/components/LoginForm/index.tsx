@@ -100,7 +100,6 @@ export default function LoginForm() {
         Cookies.set('token', response.token, {
           expires: tokenDuration
         });
-
         router.push('/home');
       } catch (error) {
         setIsValidEmailAndPassword(false);

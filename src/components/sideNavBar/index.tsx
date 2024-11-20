@@ -69,9 +69,6 @@ export default function SideNavBar() {
       window.removeEventListener('resize', checkIsMobile);
     };
   }, [token, pathName]);
-
-  console.log(userInfo);
-
   const recoverPasswordRegex = /\/account\/reset\/(.+)/;
 
   if (
