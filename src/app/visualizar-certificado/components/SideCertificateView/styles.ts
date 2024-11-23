@@ -82,6 +82,26 @@ export const Printer = styled(Button)`
   width: 90%;
 `;
 
+export const Accept = styled(Button)`
+  background: #5ebc4f;
+  color: #fff;
+  padding: 0.8em;
+  border-radius: 20px;
+  font-size: 0.7em;
+  width: 90%;
+  margin: 0.8em;
+`;
+
+export const Decline = styled(Button)`
+  background: #b21313;
+  color: #fff;
+  padding: 0.8em;
+  border-radius: 20px;
+  font-size: 0.7em;
+  width: 90%;
+  margin: 0.8em;
+`;
+
 export const Back = styled(Button)`
   background: #f5f5f5;
   color: #1c3c78;

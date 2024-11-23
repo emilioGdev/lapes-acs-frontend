@@ -1,8 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
+import { sucessToast } from '../../../functions/sucessToast';
+import { CommissionList, sendToTeacher } from '../../../services/coordinator';
+import { Commission } from '../../../services/coordinator/types';
 import { downloadPDF } from '../../../services/request';
 import { CertificateList } from '../../CertificateList';
 import { Pagination } from '../../Pagination';
@@ -15,9 +18,18 @@ import moment from 'moment';
 
 export default function ViewRequestContent(props: ViewRequestProps) {
   const iconSize = 24;
-  const { id, dataDeSubmissao, requisicaoStatus, observacao, certificados } =
-    props;
+  const {
+    id,
+    dataDeSubmissao,
+    requisicaoStatus,
+    observacao,
+    certificados,
+    typeUser
+  } = props;
   const [currentPage, setCurrentPage] = useState(1);
+  const [commissionList, setCommissionList] = useState<Array<Commission>>([]);
+  const [teacher, setTeacher] = useState<string>('');
+  const [errorTeacher, setErrorTeacher] = useState<boolean>(false);
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -59,6 +71,37 @@ export default function ViewRequestContent(props: ViewRequestProps) {
       console.error('Erro ao baixar o PDF:', error);
     }
   };
+
+  useEffect(() => {
+    if (typeUser == 'COORDENADOR') {
+      const commission = async () => {
+        const response = await CommissionList(token);
+        setCommissionList(response);
+      };
+      commission();
+    }
+  }, [token, typeUser]);
+
+  const sendToSelectTeacher = async () => {
+    if (errorTeacher == true) {
+      await sendToTeacher(token, parseInt(teacher), id);
+      sucessToast('Requisição enviada ao professor(a)');
+    }
+  };
+
+  const checkTeacher = (type: string): boolean => {
+    if (type === '') {
+      return false;
+    }
+    return true;
+  };
+
+  const handleChangeTeacher = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setTeacher(value);
+    setErrorTeacher(checkTeacher(value));
+  };
+
   return (
     <div>
       <S.Container>
@@ -98,6 +141,25 @@ export default function ViewRequestContent(props: ViewRequestProps) {
         <S.CoordObservation>
           {observacao === null ? 'Sem observações na solicitação' : observacao}
         </S.CoordObservation>
+        {typeUser == 'COORDENADOR' && (
+          <S.ChooseTeacher>
+            <S.ComponentsContainer>
+              <S.Description>Escolher Professor:</S.Description>
+              <S.RegisterSelect onChange={handleChangeTeacher}>
+                <S.SelectOption value="">Professores</S.SelectOption>
+                {commissionList.map((item) => (
+                  <S.SelectOption value={item.id} key={item.id}>
+                    {item.nomeCompleto}
+                  </S.SelectOption>
+                ))}
+              </S.RegisterSelect>
+              {!errorTeacher && (
+                <S.ErroMessage>*Selecione um professor</S.ErroMessage>
+              )}
+            </S.ComponentsContainer>
+            <S.Sender label="Enviar" onClick={sendToSelectTeacher} />
+          </S.ChooseTeacher>
+        )}
         <S.CertificateTitle>Certificados:</S.CertificateTitle>
         <S.Division />
         {displayedItems.map((certificado) => (

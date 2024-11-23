@@ -12,14 +12,22 @@ interface CertificateViewInterface {
   token: string;
   id: number;
   requestId: number;
+  userPerfil: string;
 }
 
 export const CertificateView = ({
   token,
   id,
-  requestId
+  requestId,
+  userPerfil
 }: CertificateViewInterface) => {
   const [certificate, setCertificate] = useState<getCertificateInterface>();
+
+  const [observacion, setObservacion] = useState<string>();
+  const [hours, setHours] = useState<string>();
+  const [isReadyToSent, setIsReadyToSent] = useState(false);
+  const [errorObservation, setErrorObservation] = useState<boolean>(false);
+  const [errorHours, setErrorHours] = useState<boolean>(false);
 
   useEffect(() => {
     const certificateFetch = async () => {
@@ -28,7 +36,6 @@ export const CertificateView = ({
           id: id,
           token: token
         });
-        console.log(certificateResponse);
         setCertificate(certificateResponse);
       } catch (error) {
         console.error('error', error);
@@ -37,6 +44,15 @@ export const CertificateView = ({
     certificateFetch();
   }, [id, token]);
 
+  const handleChangeObservation = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setObservacion(value);
+  };
+
+  const handleChangeHours = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setHours(value);
+  };
   return (
     <S.Container>
       <S.RequestDiv>
@@ -80,6 +96,45 @@ export const CertificateView = ({
           </S.DataRow>
         </S.DataDiv>
       )}
+      {userPerfil &&
+        userPerfil == 'COMISSAO' &&
+        (certificate &&
+        certificate.statusCertificado == 'ENCAMINHADO_COMISSAO' ? (
+          <S.InputLines>
+            <S.InputGroup>
+              <S.Label>Observação:</S.Label>
+              <S.Input
+                type="text"
+                onChange={handleChangeObservation}
+                value={observacion}
+                disabled={isReadyToSent}
+                required
+              />
+              {errorObservation ? (
+                <S.ErrorSpan>*Entrada inválida</S.ErrorSpan>
+              ) : (
+                <></>
+              )}
+            </S.InputGroup>
+            <S.InputGroup>
+              <S.Label>Horas:</S.Label>
+              <S.Input
+                type="text"
+                onChange={handleChangeHours}
+                value={hours}
+                disabled={isReadyToSent}
+                required
+              />
+              {errorHours ? (
+                <S.ErrorSpan>*Entrada inválida</S.ErrorSpan>
+              ) : (
+                <></>
+              )}
+            </S.InputGroup>
+          </S.InputLines>
+        ) : (
+          <>Já foi avaliado</>
+        ))}
       {/*
       <S.ButtonDiv>
         <S.DownloadCertificate

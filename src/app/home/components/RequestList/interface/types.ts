@@ -17,4 +17,5 @@ export type ComponentProps = {
   type?: boolean;
   reloadRequestDelete: () => void;
   reloadRequestArchive: () => void;
+  typeUser?: string;
 };

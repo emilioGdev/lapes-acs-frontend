@@ -5,7 +5,7 @@ import { Certificate } from '../../../../services/request/types';
 import Downloadcertificado from '../../../registrar-certificado/PDFViewer/Downloadcertificado';
 import * as S from './styles';
 
-import { Printer } from '@phosphor-icons/react';
+import { CheckFat, Printer, Prohibit } from '@phosphor-icons/react';
 
 interface SideViewInterface {
   certificate: Array<Certificate> | undefined;
@@ -45,6 +45,7 @@ export const SideCertificateView = ({
     // Call the downloadPDF function with the desired PDF ID
     Downloadcertificado(dowloadPfd); // Replace 123 with the actual PDF ID
   };
+
   return (
     <S.Container>
       <S.Content>
@@ -70,6 +71,19 @@ export const SideCertificateView = ({
               })}
           </S.ListDiv>
           <S.ButtonDiv>
+            {certificates.find((cert) => cert.id === selectedCertificate)
+              ?.statusCertificado === 'ENCAMINHADO_COMISSAO' && (
+              <>
+                <S.Accept
+                  label="Aceitar"
+                  startAdornment={<CheckFat size={20} weight="fill" />}
+                />
+                <S.Decline
+                  label="Recusar"
+                  startAdornment={<Prohibit size={20} weight="bold" />}
+                />
+              </>
+            )}
             <S.Printer
               label="Imprimir Solicitacao"
               startAdornment={<Printer size={20} />}

@@ -1,11 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { PaginationComp } from '../../../../components/PaginationComp';
+import { coordPagination } from '../../../../services/coordinator';
+import { PageValue } from '../../../../services/coordinator/types';
 import { RequestList } from '../RequestList';
 import * as S from './style';
 
 import { ArrowCircleLeft, ArrowCircleRight } from '@phosphor-icons/react';
+import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export const Coord = () => {
@@ -18,26 +22,47 @@ export const Coord = () => {
     { grade: 'ES 24.1' }
   ];
 
+  const token = Cookies.get('token') || '';
   const totalTasks = 100;
   const [completedTasks, setCompletedTasks] = useState<number>(40);
   const [reloadEffect, setReloadEffect] = useState<number>(0);
+  const [requestsPag, setRequestsPag] = useState<PageValue>();
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [requestId, setRequestId] = useState<number>(0);
+  const [archive, setArchive] = useState<boolean>(false);
+
+  useEffect(() => {
+    const requestPagination = async (page: number) => {
+      const paginationResponse = await coordPagination({
+        token,
+        pag: page,
+        value: 3
+      });
+      setRequestsPag(paginationResponse);
+    };
+    setArchive(false);
+    requestPagination(currentPage);
+  }, [token, currentPage, reloadEffect]);
 
   const percentage = (completedTasks / totalTasks) * 100;
-
-  const Requests = {
-    requisicoes: [
-      {
-        status: 'TRANSITO',
-        id: 1,
-        data: '2024-11-16T12:00:00Z',
-        quantidadeDeHoras: 5
-      }
-    ]
-  };
 
   function reloadPag() {
     setReloadEffect((prev) => prev + 1);
   }
+
+  const handlePageChangeNext = () => {
+    if (requestsPag !== undefined) {
+      if (currentPage < requestsPag.totalPaginas - 1) {
+        setCurrentPage(currentPage + 1);
+      }
+    }
+  };
+
+  const handlePageChangeBack = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <S.FunctionContainer>
@@ -68,25 +93,46 @@ export const Coord = () => {
         <S.H2Title>Solicitações em Andamento</S.H2Title>
       </S.ControladorArea>
       <S.RequisicoesArea>
-        {Requests.requisicoes.map((item) => (
-          <RequestList
-            status={item.status}
-            id={item.id}
-            initialDate={
-              item.data == null
-                ? 'Aguardando envio'
-                : moment(item.data).format('DD/MM/YYYY')
-            }
-            hours={item.quantidadeDeHoras}
-            key={item.id}
-            token={''}
-            isDraft={false}
-            reloadRequestDelete={reloadPag}
-            reloadRequestArchive={reloadPag}
-            type={false}
-          />
-        ))}
+        {requestsPag && requestsPag.totalPaginas > 0 ? (
+          <>
+            {requestsPag.requisicoes.map((item) => (
+              <RequestList
+                status={item.status}
+                id={item.id}
+                initialDate={
+                  item.data == null
+                    ? 'Aguardando envio'
+                    : moment(item.data).format('DD/MM/YYYY')
+                }
+                hours={item.quantidadeDeHoras}
+                key={item.id}
+                token={token}
+                isDraft={false}
+                reloadRequestDelete={reloadPag}
+                reloadRequestArchive={reloadPag}
+                type={archive}
+                typeUser="COORDENADOR"
+              />
+            ))}
+          </>
+        ) : (
+          <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
+        )}
       </S.RequisicoesArea>
+      <S.PaginationDiv>
+        {requestsPag && requestsPag.totalPaginas > 1 ? (
+          <>
+            <PaginationComp
+              handlePageChangeBack={handlePageChangeBack}
+              handlePageChangeNext={handlePageChangeNext}
+              allPage={requestsPag.totalPaginas}
+              page={requestsPag.paginaAtual + 1}
+            />
+          </>
+        ) : (
+          <></>
+        )}
+      </S.PaginationDiv>
     </S.FunctionContainer>
   );
 };

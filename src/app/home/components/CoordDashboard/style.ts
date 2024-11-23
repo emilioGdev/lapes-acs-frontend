@@ -121,3 +121,10 @@ export const Contador = styled.div<TotalBarProps>`
 export const ControladorArea = styled.div``;
 
 export const RequisicoesArea = styled.div``;
+
+export const PaginationDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+`;

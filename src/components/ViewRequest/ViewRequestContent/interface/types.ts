@@ -5,6 +5,7 @@ export type ViewRequestProps = {
   requisicaoStatus?: string;
   observacao?: string;
   certificados?: Array<Certificate>;
+  typeUser?: string;
 };
 export interface StatusCheckInterface {
   [key: string]: string;
