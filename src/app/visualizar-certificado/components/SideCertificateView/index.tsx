@@ -11,12 +11,14 @@ interface SideViewInterface {
   certificate: Array<Certificate> | undefined;
   onCertificateClick: (id: number) => void;
   dowloadPfd: number;
+  onChangeStatus?: (string) => void;
 }
 
 export const SideCertificateView = ({
   certificate,
   onCertificateClick,
-  dowloadPfd
+  dowloadPfd,
+  onChangeStatus
 }: SideViewInterface) => {
   const router = useRouter();
   const [certificates, setCertificates] = useState<Array<Certificate>>([]);
@@ -77,10 +79,12 @@ export const SideCertificateView = ({
                 <S.Accept
                   label="Aceitar"
                   startAdornment={<CheckFat size={20} weight="fill" />}
+                  onClick={() => onChangeStatus('CONCLUIDO')}
                 />
                 <S.Decline
                   label="Recusar"
                   startAdornment={<Prohibit size={20} weight="bold" />}
+                  onClick={() => onChangeStatus('PROBLEMA')}
                 />
               </>
             )}

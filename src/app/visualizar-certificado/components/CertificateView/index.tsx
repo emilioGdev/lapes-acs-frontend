@@ -13,13 +13,17 @@ interface CertificateViewInterface {
   id: number;
   requestId: number;
   userPerfil: string;
+  onObservationChange?: (string) => void;
+  onHoursChange?: (string) => void;
 }
 
 export const CertificateView = ({
   token,
   id,
   requestId,
-  userPerfil
+  userPerfil,
+  onHoursChange,
+  onObservationChange
 }: CertificateViewInterface) => {
   const [certificate, setCertificate] = useState<getCertificateInterface>();
 
@@ -47,11 +51,13 @@ export const CertificateView = ({
   const handleChangeObservation = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setObservacion(value);
+    onObservationChange(value);
   };
 
   const handleChangeHours = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setHours(value);
+    onHoursChange(value);
   };
   return (
     <S.Container>

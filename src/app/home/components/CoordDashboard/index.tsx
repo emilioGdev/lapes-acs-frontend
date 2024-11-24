@@ -28,7 +28,6 @@ export const Coord = () => {
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [requestId, setRequestId] = useState<number>(0);
   const [archive, setArchive] = useState<boolean>(false);
 
   useEffect(() => {
