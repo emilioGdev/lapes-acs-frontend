@@ -13,7 +13,6 @@ const UserProfile = () => {
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const token = Cookies.get('token') || '';
 
-  console.log(userInfo);
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {

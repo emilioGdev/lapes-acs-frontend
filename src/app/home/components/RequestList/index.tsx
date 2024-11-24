@@ -26,7 +26,8 @@ export const RequestList: React.FC<ComponentProps> = ({
   hours,
   type,
   reloadRequestDelete,
-  reloadRequestArchive
+  reloadRequestArchive,
+  typeUser
 }) => {
   const iconSize = 24;
   // Objeto para armazenar as informações da aparência do card de acordo com o status
@@ -40,19 +41,25 @@ export const RequestList: React.FC<ComponentProps> = ({
     ACEITO: {
       icon: <CheckCircle size={iconSize} />,
       description: 'Concluído',
-      viewOrEdit: <ViewRequestModal id={id} token={token} />,
+      viewOrEdit: (
+        <ViewRequestModal id={id} token={token} typeUser={typeUser} />
+      ),
       deleteOrArchive: 'archive'
     },
     TRANSITO: {
       icon: <Clock size={iconSize} />,
       description: 'Em análise',
-      viewOrEdit: <ViewRequestModal id={id} token={token} />,
+      viewOrEdit: (
+        <ViewRequestModal id={id} token={token} typeUser={typeUser} />
+      ),
       deleteOrArchive: 'none'
     },
     NEGADO: {
       icon: <WarningCircle size={iconSize} />,
       description: 'Indeferido',
-      viewOrEdit: <ViewRequestModal id={id} token={token} />,
+      viewOrEdit: (
+        <ViewRequestModal id={id} token={token} typeUser={typeUser} />
+      ),
       deleteOrArchive: 'archive'
     },
     PROBLEMA: {

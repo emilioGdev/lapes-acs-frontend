@@ -153,7 +153,6 @@ export default function RegistePageTest({ params }: idProps) {
     );
 
     setSelectedEixo(certificateData[certificateIndex]?.eixoAtividade || '');
-
   }, [
     activitiesData,
     certificateData,

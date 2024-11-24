@@ -13,11 +13,12 @@ import { Eye, XCircle } from '@phosphor-icons/react';
 export type ViewRequestModalProps = {
   id: number;
   token: string;
+  typeUser?: string;
 };
 
 export default function ViewRequestModal(props: ViewRequestModalProps) {
   const router = useRouter();
-  const { id, token } = props;
+  const { id, token, typeUser } = props;
   const iconSize = 24;
   const [isOpen, setIsOpen] = useState(false);
   const [certificateData, setCertificateData] = useState<ViewRequestProps>({
@@ -73,7 +74,7 @@ export default function ViewRequestModal(props: ViewRequestModalProps) {
         closeModalArea={closeModalArea}
         closeModal={closeModal}
         // eslint-disable-next-line react/no-children-prop
-        children={<ViewRequest {...certificateData} />}
+        children={<ViewRequest {...certificateData} typeUser={typeUser} />}
         closeText={<XCircle size={30} color="#FF0000" />}
       ></S.ModalContainer>
     </div>

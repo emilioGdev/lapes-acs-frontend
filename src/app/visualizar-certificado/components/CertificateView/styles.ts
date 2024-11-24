@@ -62,3 +62,37 @@ export const ViewCertificate = styled(Button)`
   border-radius: 20px;
   font-size: 0.7em;
 `;
+
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 10px;
+`;
+
+export const Label = styled.label`
+  font-size: 18px;
+  margin-bottom: 4px;
+  color: #253555;
+`;
+
+export const Input = styled.input`
+  height: 2rem;
+  width: 20rem;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 4px;
+  background-color: #d9d9d9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
+export const ErrorSpan = styled.span`
+  color: red;
+  font-size: 10px;
+  margin-top: 6px;
+  margin-left: 5px;
+`;
+
+export const InputLines = styled.div`
+  display: flex;
+`;

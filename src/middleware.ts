@@ -33,6 +33,8 @@ export const config = {
     '/confirmacao-cadastro',
     '/visualizar-certificado/:path*',
     '/perfil-usuario',
-    '/duvidas-frequentes/:path*'
+    '/duvidas-frequentes/:path*',
+    '/escolaridade',
+    '/comissao'
   ]
 };

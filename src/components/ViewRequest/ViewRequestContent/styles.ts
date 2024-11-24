@@ -1,3 +1,5 @@
+import Button from '../../Button';
+
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -156,4 +158,50 @@ export const CenterContent = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
+`;
+
+export const ChooseTeacher = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ComponentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 50%;
+`;
+
+export const RegisterSelect = styled.select`
+  border-radius: 20px;
+  background: #d9d9d9;
+  height: 40px;
+  box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 0.15);
+  padding: 0px 10px;
+  border: none;
+  color: #544d4f;
+`;
+
+export const SelectOption = styled.option``;
+
+export const Label = styled.label``;
+
+export const Sender = styled(Button)`
+  background: #476aad;
+  color: #fff;
+  padding: 0.8em;
+  border-radius: 20px;
+  font-size: 0.7em;
+  width: 20%;
+  margin: 0.8em;
+  height: 50%;
+  align-self: flex-end;
+`;
+
+export const ErroMessage = styled.p`
+  color: red;
+  font-size: 12px;
+  width: 100%;
+
+  margin: 0px 10px;
 `;

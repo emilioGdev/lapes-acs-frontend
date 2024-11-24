@@ -69,9 +69,6 @@ export default function SideNavBar() {
       window.removeEventListener('resize', checkIsMobile);
     };
   }, [token, pathName]);
-
-  console.log(userInfo);
-
   const recoverPasswordRegex = /\/account\/reset\/(.+)/;
 
   if (
@@ -115,7 +112,12 @@ export default function SideNavBar() {
   }
 
   return (
-    <S.Container isOpen={isOpen} ref={componentRef} isMobile={isMobile}>
+    <S.Container
+      Student={userInfo && userInfo.perfis[0] == 'ALUNO'}
+      isOpen={isOpen}
+      ref={componentRef}
+      isMobile={isMobile}
+    >
       <S.PerfilDiv>
         {!isOpen ? (
           <S.PerfilDivInside isOpen={isOpen} isMobile={isMobile}>
@@ -166,26 +168,28 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             )}
           </S.LiItems>
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
-                <>
-                  {!isMobile && (
-                    <S.navBarLink href="/solicitacoes-arquivadas">
-                      <Archive size={24} />
-                    </S.navBarLink>
-                  )}
-                </>
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
-                <S.navBarLink href="/solicitacoes-arquivadas">
-                  <Archive size={24} />
-                  <S.PLink>Arquivadas</S.PLink>
-                </S.navBarLink>
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
+          {userInfo && userInfo.perfis[0] == 'ALUNO' && (
+            <S.LiItems>
+              {!isOpen ? (
+                <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                  <>
+                    {!isMobile && (
+                      <S.navBarLink href="/solicitacoes-arquivadas">
+                        <Archive size={24} />
+                      </S.navBarLink>
+                    )}
+                  </>
+                </S.LiInsideDiv>
+              ) : (
+                <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                  <S.navBarLink href="/solicitacoes-arquivadas">
+                    <Archive size={24} />
+                    <S.PLink>Arquivadas</S.PLink>
+                  </S.navBarLink>
+                </S.LiInsideDiv>
+              )}
+            </S.LiItems>
+          )}
           <S.LiItems>
             {!isOpen ? (
               <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
