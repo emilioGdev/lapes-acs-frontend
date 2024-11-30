@@ -33,26 +33,21 @@ export const evaluateCertificate = async (
   token: string,
   certificateId: number,
   status: string,
-  obsevation: string,
+  observation: string,
   hours: number
-): Promise<void> => {
-  console.log('token 2' + token);
-  console.log('id do certificado 2' + certificateId);
-  console.log('status 2' + status);
-  console.log('observacao 2' + obsevation);
-  console.log('horas 2' + hours);
-  await fetchWrapperTest(
-    `api/comissao/certificados?
-      certificadoId=${certificateId.toString()}
-      &status=${status}
-      &observacao=${obsevation}
-      &cargaHoraria=${hours}`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
+) => {
+  const params = new URLSearchParams({
+    certificadoId: certificateId.toString(),
+    status,
+    observacao: observation,
+    cargaHoraria: hours.toString()
+  });
+
+  await fetchWrapperTest(`api/comissao/certificados?${params}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
     }
-  );
+  });
 };

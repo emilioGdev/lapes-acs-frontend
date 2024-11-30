@@ -3,7 +3,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
+import { errorToast } from '../../../functions/errorToast';
 import { sucessToast } from '../../../functions/sucessToast';
+import { warnToast } from '../../../functions/warnToast';
 import { CommissionList, sendToTeacher } from '../../../services/coordinator';
 import { Commission } from '../../../services/coordinator/types';
 import { downloadPDF } from '../../../services/request';
@@ -24,7 +26,9 @@ export default function ViewRequestContent(props: ViewRequestProps) {
     requisicaoStatus,
     observacao,
     certificados,
-    typeUser
+    typeUser,
+    onCloseModal,
+    reload
   } = props;
   const [currentPage, setCurrentPage] = useState(1);
   const [commissionList, setCommissionList] = useState<Array<Commission>>([]);
@@ -83,9 +87,25 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   }, [token, typeUser]);
 
   const sendToSelectTeacher = async () => {
-    if (errorTeacher == true) {
-      await sendToTeacher(token, parseInt(teacher), id);
-      sucessToast('Requisição enviada ao professor(a)');
+    try {
+      if (errorTeacher == true) {
+        await sendToTeacher(token, parseInt(teacher), id);
+        sucessToast('Requisição enviada ao professor(a)');
+        onCloseModal();
+        reload();
+      } else {
+        warnToast('Selecione um professor');
+      }
+    } catch (error) {
+      if (
+        (error as { mensagem: string }).mensagem ===
+        'Os dados a seguir /email já estão cadastrados!'
+      ) {
+        warnToast(`${(error as { mensagem: string }).mensagem}`);
+      } else {
+        errorToast('Houve algum erro ao tentar se cadastrar!');
+        console.log(error);
+      }
     }
   };
 

@@ -9,7 +9,14 @@ import { getUserInformation } from '../../services/user';
 import { UserInformation } from '../../services/user/types';
 import * as S from './style';
 
-import { User, Power, Archive, House, Question } from '@phosphor-icons/react';
+import {
+  User,
+  Power,
+  Archive,
+  House,
+  Question,
+  CalendarCheck
+} from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 
 export default function SideNavBar() {
@@ -185,6 +192,28 @@ export default function SideNavBar() {
                   <S.navBarLink href="/solicitacoes-arquivadas">
                     <Archive size={24} />
                     <S.PLink>Arquivadas</S.PLink>
+                  </S.navBarLink>
+                </S.LiInsideDiv>
+              )}
+            </S.LiItems>
+          )}
+          {userInfo && userInfo.perfis[0] == 'COORDENADOR' && (
+            <S.LiItems>
+              {!isOpen ? (
+                <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                  <>
+                    {!isMobile && (
+                      <S.navBarLink href="/solicitacoes-concluidas">
+                        <CalendarCheck size={24} />
+                      </S.navBarLink>
+                    )}
+                  </>
+                </S.LiInsideDiv>
+              ) : (
+                <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                  <S.navBarLink href="/solicitacoes-concluidas">
+                    <CalendarCheck size={24} />
+                    <S.PLink>Concluidas</S.PLink>
                   </S.navBarLink>
                 </S.LiInsideDiv>
               )}

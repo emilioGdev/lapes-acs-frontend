@@ -35,6 +35,7 @@ export const config = {
     '/perfil-usuario',
     '/duvidas-frequentes/:path*',
     '/escolaridade',
-    '/comissao'
+    '/comissao',
+    '/solicitacoes-concluidas'
   ]
 };
