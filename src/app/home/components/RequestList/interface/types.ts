@@ -19,4 +19,5 @@ export type ComponentProps = {
   reloadRequestArchive: () => void;
   typeUser?: string;
   reload?: () => void;
+  comissao?: string;
 };

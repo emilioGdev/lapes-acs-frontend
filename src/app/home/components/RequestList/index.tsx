@@ -28,7 +28,8 @@ export const RequestList: React.FC<ComponentProps> = ({
   reloadRequestDelete,
   reloadRequestArchive,
   typeUser,
-  reload
+  reload,
+  comissao
 }) => {
   const iconSize = 24;
   // Objeto para armazenar as informações da aparência do card de acordo com o status
@@ -119,6 +120,12 @@ export const RequestList: React.FC<ComponentProps> = ({
           <S.Title>ID:</S.Title>
           <S.Text>{id}</S.Text>
         </S.Content>
+        {typeUser == 'COORDENADOR' && (
+          <S.Content>
+            <S.Title>Comissão:</S.Title>
+            <S.Text>{comissao}</S.Text>
+          </S.Content>
+        )}
         <S.Content>
           <S.Title>Data da solicitação:</S.Title>
           <S.Text>{initialDate}</S.Text>

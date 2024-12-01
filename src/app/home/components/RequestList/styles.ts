@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 export const Card = styled.div<{ cardcolor: string }>`
   display: grid;
-  grid-template-columns: 0.1fr 0.5fr 1fr 0.5fr 0.5fr 70px;
+  grid-template-columns: 0.1fr 0.5fr 1fr 0.5fr 0.5fr 0.5fr 70px;
   gap: 0.3rem;
   justify-content: center;
   align-items: center;

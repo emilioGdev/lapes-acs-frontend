@@ -3,8 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { getArchived } from '../../services/request';
-import { UserRequest } from '../../services/request/types';
+import { PaginationComp } from '../../components/PaginationComp';
+import { coordConcluiedlist } from '../../services/coordinator';
+import { PageValue } from '../../services/coordinator/types';
 import { RequestList } from '../home/components/RequestList';
 import * as S from './styles';
 
@@ -13,25 +14,25 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export default function SolicitacoesConcluidas() {
-  const [requestList, setRequestList] = useState<Array<UserRequest>>([]);
-  const [filteredRequestList, setFilteredRequestList] = useState<
-    Array<UserRequest>
-  >([]);
   const [reloadEffect, setReloadEffect] = useState<number>(0);
+  const [requestsPag, setRequestsPag] = useState<PageValue>();
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const [archive, setArchive] = useState<boolean>(false);
-  const [searchTerm, setSearchTerm] = useState<string>('');
   const router = useRouter();
   const token = Cookies.get('token') || '';
 
   useEffect(() => {
-    const archiveRequest = async () => {
-      const requestResponse = await getArchived(token);
-      setRequestList(requestResponse);
-      setFilteredRequestList(requestResponse);
+    const requestPagination = async (page: number) => {
+      const paginationResponse = await coordConcluiedlist({
+        token,
+        pag: page,
+        value: 4
+      });
+      setRequestsPag(paginationResponse);
     };
-    setArchive(true);
-    archiveRequest();
-  }, [token, reloadEffect]);
+    setArchive(false);
+    requestPagination(currentPage);
+  }, [token, currentPage, reloadEffect]);
 
   function backHome() {
     router.push('/home');
@@ -41,22 +42,19 @@ export default function SolicitacoesConcluidas() {
     setReloadEffect((prev) => prev + 1);
   }
 
-  function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const value = event.target.value.toLowerCase();
-    setSearchTerm(value);
+  const handlePageChangeNext = () => {
+    if (requestsPag !== undefined) {
+      if (currentPage < requestsPag.totalPaginas - 1) {
+        setCurrentPage(currentPage + 1);
+      }
+    }
+  };
 
-    const filteredRequests = requestList.filter(
-      (item) =>
-        item.id.toString().includes(value) ||
-        item.requisicaoStatus.toLowerCase().includes(value)
-    );
-
-    console.log(filteredRequests);
-
-    setFilteredRequestList(filteredRequests);
-  }
-
-  console.log(requestList);
+  const handlePageChangeBack = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <S.Container>
@@ -67,11 +65,11 @@ export default function SolicitacoesConcluidas() {
         </S.TitleDiv>
         <S.FilterDiv>
           <S.InputRequestDiv>
-            <S.RegisterInput
+            {/* <S.RegisterInput
               placeholder="Pesquisar"
               value={searchTerm}
               onChange={handleSearchChange}
-            />
+            /> */}
             <S.IconButton>
               <Funnel size={28} weight="fill" />
             </S.IconButton>
@@ -81,27 +79,48 @@ export default function SolicitacoesConcluidas() {
           </S.BackDiv>
         </S.FilterDiv>
         <S.RequestDiv>
-          {filteredRequestList.length > 0 ? (
-            filteredRequestList.map((item) => (
-              <RequestList
-                status={item.requisicaoStatus}
-                id={item.id}
-                initialDate={moment(item.dataDeSubmissao).format('DD/MM/YYYY')}
-                hours={item.quantidadeDeHoras}
-                key={item.id}
-                token={token}
-                isDraft={true}
-                reloadRequestDelete={function (): void {
-                  throw new Error('Function not implemented.');
-                }}
-                reloadRequestArchive={reloadPag}
-                type={archive}
-              />
-            ))
+          {requestsPag && requestsPag.totalPaginas > 0 ? (
+            <>
+              {requestsPag.requisicoes.map((item) => (
+                <RequestList
+                  status={item.status}
+                  id={item.id}
+                  initialDate={
+                    item.data == null
+                      ? 'Aguardando envio'
+                      : moment(item.data).format('DD/MM/YYYY')
+                  }
+                  hours={item.quantidadeDeHoras}
+                  key={item.id}
+                  token={token}
+                  isDraft={false}
+                  reloadRequestDelete={reloadPag}
+                  reloadRequestArchive={reloadPag}
+                  type={archive}
+                  typeUser="COORDENADOR"
+                  reload={reloadPag}
+                  comissao={item.comissao.nomeCompleto}
+                />
+              ))}
+            </>
           ) : (
-            <p>Não existe nenhuma solicitação arquivada.</p>
+            <p>Nenhuma solicitação registrada...</p>
           )}
         </S.RequestDiv>
+        <S.PaginationDiv>
+          {requestsPag && requestsPag.totalPaginas > 1 ? (
+            <>
+              <PaginationComp
+                handlePageChangeBack={handlePageChangeBack}
+                handlePageChangeNext={handlePageChangeNext}
+                allPage={requestsPag.totalPaginas}
+                page={requestsPag.paginaAtual + 1}
+              />
+            </>
+          ) : (
+            <></>
+          )}
+        </S.PaginationDiv>
       </S.Content>
     </S.Container>
   );

@@ -109,3 +109,10 @@ export const BackButton = styled(Button)`
 `;
 
 export const BackDiv = styled.div``;
+
+export const PaginationDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+`;

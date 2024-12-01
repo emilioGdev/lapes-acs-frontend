@@ -50,6 +50,33 @@ export const CommissionList = async (
   }
 };
 
+export const coordConcluiedlist = async ({
+  token,
+  pag,
+  value
+}: {
+  token: string;
+  pag: number;
+  value: number;
+}): Promise<PageValue> => {
+  try {
+    const response: PageValue = await fetchWrapper(
+      `api/coordenador/requisicoes/comissao?pagina=${pag}&quantidade=${value}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error('erro', error);
+    throw error;
+  }
+};
+
 export const sendToTeacher = async (
   token: string,
   teacherId: number,
