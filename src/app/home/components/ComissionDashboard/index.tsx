@@ -25,7 +25,7 @@ export const Comission = () => {
       const paginationResponse = await commissionPagination({
         token,
         pag: page,
-        value: 3
+        value: 5
       });
 
       const paginationResponseCompleted = await commissionPagination({
