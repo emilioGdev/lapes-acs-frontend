@@ -3,7 +3,10 @@
 import { useEffect, useState } from 'react';
 
 import { PaginationComp } from '../../../../components/PaginationComp';
-import { commissionPagination } from '../../../../services/commission';
+import {
+  commissionPagination,
+  commissionTransitPagination
+} from '../../../../services/commission';
 import { PageValue } from '../../../../services/commission/types';
 import { RequestList } from '../RequestList';
 import * as S from './styles';
@@ -22,7 +25,7 @@ export const Comission = () => {
 
   useEffect(() => {
     const requestPagination = async (page: number) => {
-      const paginationResponse = await commissionPagination({
+      const paginationResponse = await commissionTransitPagination({
         token,
         pag: page,
         value: 5
@@ -86,27 +89,25 @@ export const Comission = () => {
       <S.RequisicoesArea>
         {requestsPag && requestsPag.totalPaginas > 0 ? (
           <>
-            {requestsPag.requisicoes
-              .filter((item) => ['TRANSITO'].includes(item.status))
-              .map((item) => (
-                <RequestList
-                  status={item.status}
-                  id={item.id}
-                  initialDate={
-                    item.data == null
-                      ? 'Aguardando envio'
-                      : moment(item.data).format('DD/MM/YYYY')
-                  }
-                  hours={item.quantidadeDeHoras}
-                  key={item.id}
-                  token={token}
-                  isDraft={false}
-                  reloadRequestDelete={reloadPag}
-                  reloadRequestArchive={reloadPag}
-                  type={archive}
-                  reload={reloadPag}
-                />
-              ))}
+            {requestsPag.requisicoes.map((item) => (
+              <RequestList
+                status={item.status}
+                id={item.id}
+                initialDate={
+                  item.data == null
+                    ? 'Aguardando envio'
+                    : moment(item.data).format('DD/MM/YYYY')
+                }
+                hours={item.quantidadeDeHoras}
+                key={item.id}
+                token={token}
+                isDraft={false}
+                reloadRequestDelete={reloadPag}
+                reloadRequestArchive={reloadPag}
+                type={archive}
+                reload={reloadPag}
+              />
+            ))}
           </>
         ) : (
           <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>

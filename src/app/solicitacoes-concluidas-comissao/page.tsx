@@ -4,12 +4,11 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { PaginationComp } from '../../components/PaginationComp';
-import { commissionPagination } from '../../services/commission';
+import { commissionConcluidedPagination } from '../../services/commission';
 import { PageValue } from '../../services/coordinator/types';
 import { RequestList } from '../home/components/RequestList';
 import * as S from './styles';
 
-import { Funnel } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
@@ -23,10 +22,10 @@ export default function SolicitacoesConcluidasComissao() {
 
   useEffect(() => {
     const requestPagination = async (page: number) => {
-      const paginationResponse = await commissionPagination({
+      const paginationResponse = await commissionConcluidedPagination({
         token,
         pag: page,
-        value: 99999
+        value: 5
       });
       setRequestsPag(paginationResponse);
     };
@@ -56,8 +55,6 @@ export default function SolicitacoesConcluidasComissao() {
     }
   };
 
-  console.log(requestsPag);
-
   return (
     <S.Container>
       <S.Content>
@@ -72,9 +69,9 @@ export default function SolicitacoesConcluidasComissao() {
               value={searchTerm}
               onChange={handleSearchChange}
             /> */}
-            <S.IconButton>
+            {/* <S.IconButton>
               <Funnel size={28} weight="fill" />
-            </S.IconButton>
+            </S.IconButton> */}
           </S.InputRequestDiv>
           <S.BackDiv>
             <S.BackButton label="Voltar" onClick={backHome} />
@@ -83,29 +80,25 @@ export default function SolicitacoesConcluidasComissao() {
         <S.RequestDiv>
           {requestsPag && requestsPag.totalPaginas > 0 ? (
             <>
-              {requestsPag.requisicoes
-                .filter((item) =>
-                  ['ACEITO', 'PROBLEMA', 'NEGADO'].includes(item.status)
-                )
-                .map((item) => (
-                  <RequestList
-                    status={item.status}
-                    id={item.id}
-                    initialDate={
-                      item.data == null
-                        ? 'Aguardando envio'
-                        : moment(item.data).format('DD/MM/YYYY')
-                    }
-                    hours={item.quantidadeDeHoras}
-                    key={item.id}
-                    token={token}
-                    isDraft={false}
-                    reloadRequestDelete={reloadPag}
-                    reloadRequestArchive={reloadPag}
-                    type={archive}
-                    reload={reloadPag}
-                  />
-                ))}
+              {requestsPag.requisicoes.map((item) => (
+                <RequestList
+                  status={item.status}
+                  id={item.id}
+                  initialDate={
+                    item.data == null
+                      ? 'Aguardando envio'
+                      : moment(item.data).format('DD/MM/YYYY')
+                  }
+                  hours={item.quantidadeDeHoras}
+                  key={item.id}
+                  token={token}
+                  isDraft={false}
+                  reloadRequestDelete={reloadPag}
+                  reloadRequestArchive={reloadPag}
+                  type={archive}
+                  reload={reloadPag}
+                />
+              ))}
             </>
           ) : (
             <p>Nenhuma solicitação registrada...</p>
