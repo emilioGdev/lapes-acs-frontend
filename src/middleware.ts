@@ -36,6 +36,7 @@ export const config = {
     '/duvidas-frequentes/:path*',
     '/escolaridade',
     '/comissao',
-    '/solicitacoes-concluidas'
+    '/solicitacoes-concluidas',
+    '/solicitacoes-concluidas-comissao'
   ]
 };

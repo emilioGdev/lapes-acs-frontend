@@ -219,6 +219,28 @@ export default function SideNavBar() {
               )}
             </S.LiItems>
           )}
+          {userInfo && userInfo.perfis[0] == 'COMISSAO' && (
+            <S.LiItems>
+              {!isOpen ? (
+                <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                  <>
+                    {!isMobile && (
+                      <S.navBarLink href="/solicitacoes-concluidas-comissao">
+                        <CalendarCheck size={24} />
+                      </S.navBarLink>
+                    )}
+                  </>
+                </S.LiInsideDiv>
+              ) : (
+                <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                  <S.navBarLink href="/solicitacoes-concluidas-comissao">
+                    <CalendarCheck size={24} />
+                    <S.PLink>Concluidas</S.PLink>
+                  </S.navBarLink>
+                </S.LiInsideDiv>
+              )}
+            </S.LiItems>
+          )}
           <S.LiItems>
             {!isOpen ? (
               <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
