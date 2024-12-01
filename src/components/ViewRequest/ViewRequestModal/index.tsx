@@ -14,11 +14,12 @@ export type ViewRequestModalProps = {
   id: number;
   token: string;
   typeUser?: string;
+  reload?: () => void;
 };
 
 export default function ViewRequestModal(props: ViewRequestModalProps) {
   const router = useRouter();
-  const { id, token, typeUser } = props;
+  const { id, token, typeUser, reload } = props;
   const iconSize = 24;
   const [isOpen, setIsOpen] = useState(false);
   const [certificateData, setCertificateData] = useState<ViewRequestProps>({
@@ -74,7 +75,14 @@ export default function ViewRequestModal(props: ViewRequestModalProps) {
         closeModalArea={closeModalArea}
         closeModal={closeModal}
         // eslint-disable-next-line react/no-children-prop
-        children={<ViewRequest {...certificateData} typeUser={typeUser} />}
+        children={
+          <ViewRequest
+            {...certificateData}
+            typeUser={typeUser}
+            onCloseModal={closeModalArea}
+            reload={reload}
+          />
+        }
         closeText={<XCircle size={30} color="#FF0000" />}
       ></S.ModalContainer>
     </div>

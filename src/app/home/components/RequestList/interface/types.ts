@@ -18,4 +18,6 @@ export type ComponentProps = {
   reloadRequestDelete: () => void;
   reloadRequestArchive: () => void;
   typeUser?: string;
+  reload?: () => void;
+  comissao?: string;
 };

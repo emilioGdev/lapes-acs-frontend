@@ -3,7 +3,10 @@
 import { useEffect, useState } from 'react';
 
 import { PaginationComp } from '../../../../components/PaginationComp';
-import { commissionPagination } from '../../../../services/commission';
+import {
+  commissionPagination,
+  commissionTransitPagination
+} from '../../../../services/commission';
 import { PageValue } from '../../../../services/commission/types';
 import { RequestList } from '../RequestList';
 import * as S from './styles';
@@ -13,23 +16,37 @@ import moment from 'moment';
 
 export const Comission = () => {
   const token = Cookies.get('token') || '';
-  const totalTasks = 100;
-  const [completedTasks, setCompletedTasks] = useState<number>(40);
+  const [totalTasks, setTotalTasks] = useState<number>(0);
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [requestId, setRequestId] = useState<number>(0);
   const [archive, setArchive] = useState<boolean>(false);
+  const [completedTasks, setCompletedTasks] = useState<number>();
 
   useEffect(() => {
     const requestPagination = async (page: number) => {
-      const paginationResponse = await commissionPagination({
+      const paginationResponse = await commissionTransitPagination({
         token,
         pag: page,
-        value: 3
+        value: 5
       });
+
+      const paginationResponseCompleted = await commissionPagination({
+        token,
+        pag: 0,
+        value: 999999999
+      });
+
+      const total = paginationResponseCompleted.requisicoes.length;
+      const completed = paginationResponseCompleted.requisicoes.filter((item) =>
+        ['ACEITO', 'NEGADO', 'PROBLEMA'].includes(item.status)
+      ).length;
+
       setRequestsPag(paginationResponse);
+      setCompletedTasks(completed);
+      setTotalTasks(total);
     };
+
     setArchive(false);
     requestPagination(currentPage);
   }, [token, currentPage, reloadEffect]);
@@ -88,6 +105,7 @@ export const Comission = () => {
                 reloadRequestDelete={reloadPag}
                 reloadRequestArchive={reloadPag}
                 type={archive}
+                reload={reloadPag}
               />
             ))}
           </>

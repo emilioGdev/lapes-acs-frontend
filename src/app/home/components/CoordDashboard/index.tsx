@@ -8,19 +8,18 @@ import { PageValue } from '../../../../services/coordinator/types';
 import { RequestList } from '../RequestList';
 import * as S from './style';
 
-import { ArrowCircleLeft, ArrowCircleRight } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export const Coord = () => {
-  const buttonData = [
-    { grade: 'ES 19.1' },
-    { grade: 'ES 20.1' },
-    { grade: 'ES 21.1' },
-    { grade: 'ES 22.1' },
-    { grade: 'ES 23.1' },
-    { grade: 'ES 24.1' }
-  ];
+  // const buttonData = [
+  //   { grade: 'ES 19.1' },
+  //   { grade: 'ES 20.1' },
+  //   { grade: 'ES 21.1' },
+  //   { grade: 'ES 22.1' },
+  //   { grade: 'ES 23.1' },
+  //   { grade: 'ES 24.1' }
+  // ];
 
   const token = Cookies.get('token') || '';
   const totalTasks = 100;
@@ -65,7 +64,7 @@ export const Coord = () => {
 
   return (
     <S.FunctionContainer>
-      <S.TurmasArea>
+      {/*<S.TurmasArea>
         <S.H2Title>Turmas</S.H2Title>
         <S.TurmaSelect>
           <ArrowCircleLeft size={32} />
@@ -74,7 +73,7 @@ export const Coord = () => {
           ))}
           <ArrowCircleRight size={32} />
         </S.TurmaSelect>
-      </S.TurmasArea>
+      </S.TurmasArea>*/}
       <S.ContadorArea>
         <S.ContadorLabel>
           <label>Lidas:</label>
@@ -111,6 +110,7 @@ export const Coord = () => {
                 reloadRequestArchive={reloadPag}
                 type={archive}
                 typeUser="COORDENADOR"
+                reload={reloadPag}
               />
             ))}
           </>

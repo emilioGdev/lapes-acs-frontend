@@ -1,4 +1,5 @@
 import { Course } from '../courses/types';
+import { UserInformation } from '../user/types';
 
 export interface UserRequest {
   certificados?: Array<Certificate>;
@@ -37,6 +38,7 @@ export interface RequestPagination {
   data: Date;
   quantidadeDeHoras: number;
   status: string;
+  comissao?: UserInformation;
 }
 
 export interface Commission {

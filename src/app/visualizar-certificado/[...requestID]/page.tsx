@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
+import { errorToast } from '../../../functions/errorToast';
+import { sucessToast } from '../../../functions/sucessToast';
+import { warnToast } from '../../../functions/warnToast';
 import { evaluateCertificate } from '../../../services/commission';
 import { getRequest } from '../../../services/request';
 import { UserRequest } from '../../../services/request/types';
@@ -60,19 +63,26 @@ export default function VisualizarCertificado({ params }: idProps) {
 
   const handleChangeStatus = (status) => {
     const evaluate = async () => {
-      console.log('token ' + token);
-      console.log('id do certificado ' + certificateId);
-      console.log('status ' + status);
-      console.log('observacao ' + observacion);
-      console.log('horas ' + hours);
-      const response = await evaluateCertificate(
-        token,
-        certificateId,
-        status,
-        observacion,
-        parseInt(hours)
-      );
-      console.log(response);
+      try {
+        await evaluateCertificate(
+          token,
+          certificateId,
+          status,
+          observacion,
+          parseInt(hours)
+        );
+        sucessToast('Certificado avaliado com sucesso!');
+      } catch (error) {
+        if (
+          (error as { mensagem: string }).mensagem ===
+          'Os dados a seguir /email já estão cadastrados!'
+        ) {
+          warnToast(`${(error as { mensagem: string }).mensagem}`);
+        } else {
+          errorToast('Houve algum erro ao tentar se cadastrar!');
+          console.log(error);
+        }
+      }
     };
     evaluate();
   };
