@@ -48,12 +48,15 @@ export default function CertificadosAluno({ params }: idProps) {
             <S.BackButton label="Voltar" onClick={backHome} />
           </S.BackDiv>
         </S.FilterDiv>
-        {certificates &&
+        {certificates && certificates.length > 0 ? (
           certificates.map((item, key) => (
             <S.PDFDiv key={key}>
               <PDFViewer pdfId={item.id} />
             </S.PDFDiv>
-          ))}
+          ))
+        ) : (
+          <p>Sem certificados aprovados ainda...</p>
+        )}
       </S.Content>
     </S.Container>
   );
