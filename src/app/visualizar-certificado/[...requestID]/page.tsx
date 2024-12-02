@@ -31,6 +31,8 @@ export default function VisualizarCertificado({ params }: idProps) {
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [observacion, setObservacion] = useState<string>();
   const [hours, setHours] = useState<string>();
+  const [isRequestVerify, setIsRequestVerify] = useState<boolean>(false);
+  const [reloadEffect, setReloadEffect] = useState<number>(0);
 
   useEffect(() => {
     setRequestIdSelect(parseInt(params.requestID));
@@ -40,6 +42,12 @@ export default function VisualizarCertificado({ params }: idProps) {
         token
       );
       setSelectId(requestResponse);
+      const allCertificatesValid = requestResponse.certificados.every(
+        (certificado) =>
+          certificado.statusCertificado === 'CONCLUIDO' ||
+          certificado.statusCertificado === 'PROBLEMAS'
+      );
+      setIsRequestVerify(allCertificatesValid);
     };
     const userInfo = async () => {
       const userResponse = await getUserInformation(token);
@@ -47,7 +55,7 @@ export default function VisualizarCertificado({ params }: idProps) {
     };
     userInfo();
     requestIdFetch();
-  }, [params, requestIdSelect, setSelectId, token]);
+  }, [params, requestIdSelect, setSelectId, token, reloadEffect]);
 
   const handleCertificateClick = (id: number) => {
     setCertificateId(id);
@@ -61,6 +69,10 @@ export default function VisualizarCertificado({ params }: idProps) {
     setHours(value);
   };
 
+  function reloadPag() {
+    setReloadEffect((prev) => prev + 1);
+  }
+
   const handleChangeStatus = (status) => {
     const evaluate = async () => {
       try {
@@ -72,6 +84,7 @@ export default function VisualizarCertificado({ params }: idProps) {
           parseInt(hours)
         );
         sucessToast('Certificado avaliado com sucesso!');
+        reloadPag();
       } catch (error) {
         if (
           (error as { mensagem: string }).mensagem ===
@@ -111,6 +124,8 @@ export default function VisualizarCertificado({ params }: idProps) {
             onCertificateClick={handleCertificateClick}
             dowloadPfd={certificateId}
             onChangeStatus={handleChangeStatus}
+            isAllCertificateDid={isRequestVerify}
+            requestId={requestIdSelect}
           />
         )}
       </S.ContentDiv>

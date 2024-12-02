@@ -59,6 +59,7 @@ export const CertificateView = ({
     setHours(value);
     onHoursChange(value);
   };
+
   return (
     <S.Container>
       <S.RequestDiv>

@@ -105,3 +105,24 @@ export const evaluateCertificate = async (
     }
   });
 };
+
+export const evaluateRequest = async (
+  token: string,
+  requestId: number,
+  status: string,
+  observation: string
+) => {
+  const params = new URLSearchParams({
+    requisicaoId: requestId.toString(),
+    status,
+    observacao: observation
+  });
+
+  await fetchWrapperTest(`api/comissao/requisicao?${params}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+};
