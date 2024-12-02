@@ -1,4 +1,5 @@
 export interface getCertificateInterface {
+  id?: number;
   titulo: string;
   observacao: string;
   dataInicial: string;

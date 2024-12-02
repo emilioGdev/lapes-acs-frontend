@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -11,9 +12,11 @@ import * as S from './styles';
 
 import {
   CheckFat,
+  FileText,
   PaperPlaneTilt,
   Printer,
   Prohibit,
+  User,
   XCircle
 } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
@@ -107,6 +110,10 @@ export const SideCertificateView = ({
     evaluate();
   };
 
+  const certificateScreen = () => {
+    window.open(`/certificados-aluno/${requestId}`, '_ blank');
+  };
+
   return (
     <S.Container>
       <S.Content>
@@ -147,6 +154,26 @@ export const SideCertificateView = ({
                 />
               </>
             )}
+
+            <S.Certificate
+              label="Certificados do estudante"
+              startAdornment={<User size={20} />}
+              onClick={certificateScreen}
+            />
+
+            <Link
+              target="_blank"
+              href={
+                'https://www.upe.br/garanhuns/graduacao/cursos-presenciais/bacharelado-em-engenharia-de-software/atividades-complementares-acs/'
+              }
+              style={{ width: '100%' }}
+            >
+              <S.Barema
+                label="Barema"
+                startAdornment={<FileText size={20} />}
+              />
+            </Link>
+
             {isAllCertificateDid == true && (
               <S.Sender
                 label="Enviar solicitação"

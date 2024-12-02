@@ -37,6 +37,7 @@ export const config = {
     '/escolaridade',
     '/comissao',
     '/solicitacoes-concluidas',
-    '/solicitacoes-concluidas-comissao'
+    '/solicitacoes-concluidas-comissao',
+    '/certificados-aluno/:path*'
   ]
 };

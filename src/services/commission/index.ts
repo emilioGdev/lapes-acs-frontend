@@ -1,5 +1,6 @@
 import { fetchWrapper } from '../api';
 import { fetchWrapperTest } from '../apiTest';
+import { getCertificateInterface } from '../certificate/types';
 import { PageValue } from './types';
 
 export const commissionPagination = async ({
@@ -125,4 +126,24 @@ export const evaluateRequest = async (
       'Content-Type': 'application/json'
     }
   });
+};
+
+export const certificateStudent = async ({
+  token,
+  id
+}: {
+  token: string;
+  id: string;
+}): Promise<Array<getCertificateInterface>> => {
+  const response: Array<getCertificateInterface> = await fetchWrapper(
+    `api/comissao/aluno/certificados?requisicaoId=${id}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  return response;
 };

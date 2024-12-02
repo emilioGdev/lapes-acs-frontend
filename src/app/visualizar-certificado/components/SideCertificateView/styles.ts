@@ -115,6 +115,26 @@ export const Sender = styled(Button)`
   margin: 0.8em;
 `;
 
+export const Barema = styled(Button)`
+  background: #476aad;
+  color: #fff;
+  padding: 0.8em;
+  border-radius: 20px;
+  font-size: 0.7em;
+  width: 90%;
+  margin: 0.8em;
+`;
+
+export const Certificate = styled(Button)`
+  background: #476aad;
+  color: #fff;
+  padding: 0.8em;
+  border-radius: 20px;
+  font-size: 0.7em;
+  width: 90%;
+  margin: 0.8em;
+`;
+
 export const Back = styled(Button)`
   background: #f5f5f5;
   color: #1c3c78;
