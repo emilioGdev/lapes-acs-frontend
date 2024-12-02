@@ -28,6 +28,7 @@ interface SideViewInterface {
   onChangeStatus?: (string) => void;
   isAllCertificateDid?: boolean;
   requestId?: number;
+  typeUser?: string;
 }
 
 export const SideCertificateView = ({
@@ -36,7 +37,8 @@ export const SideCertificateView = ({
   dowloadPfd,
   onChangeStatus,
   isAllCertificateDid,
-  requestId
+  requestId,
+  typeUser
 }: SideViewInterface) => {
   const router = useRouter();
   const token = Cookies.get('token') || '';
@@ -154,33 +156,37 @@ export const SideCertificateView = ({
                 />
               </>
             )}
+            {typeUser && typeUser == 'COMISSAO' && (
+              <>
+                <S.Certificate
+                  label="Certificados do estudante"
+                  startAdornment={<User size={20} />}
+                  onClick={certificateScreen}
+                />
 
-            <S.Certificate
-              label="Certificados do estudante"
-              startAdornment={<User size={20} />}
-              onClick={certificateScreen}
-            />
+                <Link
+                  target="_blank"
+                  href={
+                    'https://www.upe.br/garanhuns/graduacao/cursos-presenciais/bacharelado-em-engenharia-de-software/atividades-complementares-acs/'
+                  }
+                  style={{ width: '100%' }}
+                >
+                  <S.Barema
+                    label="Barema"
+                    startAdornment={<FileText size={20} />}
+                  />
+                </Link>
 
-            <Link
-              target="_blank"
-              href={
-                'https://www.upe.br/garanhuns/graduacao/cursos-presenciais/bacharelado-em-engenharia-de-software/atividades-complementares-acs/'
-              }
-              style={{ width: '100%' }}
-            >
-              <S.Barema
-                label="Barema"
-                startAdornment={<FileText size={20} />}
-              />
-            </Link>
-
-            {isAllCertificateDid == true && (
-              <S.Sender
-                label="Enviar solicitação"
-                startAdornment={<PaperPlaneTilt size={20} />}
-                onClick={openModal}
-              />
+                {isAllCertificateDid == true && (
+                  <S.Sender
+                    label="Enviar solicitação"
+                    startAdornment={<PaperPlaneTilt size={20} />}
+                    onClick={openModal}
+                  />
+                )}
+              </>
             )}
+
             <S.Printer
               label="Imprimir Solicitacao"
               startAdornment={<Printer size={20} />}

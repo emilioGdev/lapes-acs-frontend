@@ -126,6 +126,7 @@ export default function VisualizarCertificado({ params }: idProps) {
             onChangeStatus={handleChangeStatus}
             isAllCertificateDid={isRequestVerify}
             requestId={requestIdSelect}
+            typeUser={userInfo && userInfo.perfis[0]}
           />
         )}
       </S.ContentDiv>
